@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Strawberry Weekend 🍓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 45px;
+      border-radius: 25px;
+      max-width: 420px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+      animation: fadeIn 1.5s ease;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #c0392b;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .emoji {
+      font-size: 40px;
+      margin: 15px 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+<audio id="music" loop>
+  <source src="dooron.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <h1>Strawberry  Weekend Invitation 🍓</h1>
+
+  <p>
+    Pack your bags,<br>
+    wear your prettiest smile 💕
+  </p>
+
+  <div class="emoji">🍓🍓🍓🍓</div>
+
+  <p>
+    Let’s escape to <b>Lonavala</b><br>
+    on <b>7th & 8th February</b>
+  </p>
+
+  <p>
+    Strawberries 🍓<br>
+    Strawberry flavours 🤤<br>
+    And some very beautiful in bed  moments are waiting for us
+  </p>
+
+  <p style="margin-top:20px;">
+    Just you & me ❤️
+  </p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  
+  const song = document.getElementById("music");
+  song.currentTime = 30;
+  song.play();
+</script>
+
+</body>
+</html>

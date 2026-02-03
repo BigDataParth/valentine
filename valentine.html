@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For You ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ff758c, #ff7eb3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .wrapper {
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    .me {
+      font-size: 4rem;
+      animation: bounce 1.5s infinite;
+    }
+
+    .heart {
+      font-size: 5rem;
+      margin: 10px 0;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      margin: 20px 0;
+    }
+
+    .btns {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #fff;
+      color: #ff4f81;
+    }
+
+    .no {
+      background: rgba(255,255,255,0.3);
+      color: white;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .tap {
+      position: fixed;
+      bottom: 15px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body onclick="startMusic()">
+
+  <audio id="bgm" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="wrapper">
+    <div class="me">👩‍❤️‍💋‍👨</div>
+    <div class="heart">❤️</div>
+    <h1>Will you be my Valentine?</h1>
+
+    <div class="btns">
+      <button class="yes" onclick="yes()">Yes 💕</button>
+      <button class="no" onclick="no()">No 🙈</button>
+    </div>
+  </div>
+
+  <div class="tap">Tap anywhere 💖</div>
+
+  <script>
+    let started = false;
+
+    function startMusic() {
+      if (!started) {
+        document.getElementById("bgm").play();
+        started = true;
+      }
+    }
+
+    function yes() {
+      window.location.href = "celebrate.html";
+    }
+
+    function no() {
+      alert("You Don't Have an Option Say YES!!! 😡");
+    }
+  </script>
+
+</body>
+</html>

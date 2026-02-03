@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>She Said YES 🎆</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .text {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: bold;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .next {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 3;
+      background: hotpink;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 22px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+	
+
+#bgVideo {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="kid.mp4" type="video/mp4">
+</video>
+
+
+<canvas id="fw"></canvas>
+
+<div class="text">
+  She said YES ✨💖🎆
+</div>
+
+<button class="next" onclick="goNext()">Next Surprise ➜</button>
+
+<audio id="song">
+  <source src="die.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const song = document.getElementById("song");
+  song.currentTime = 30;
+  song.play();
+  
+  const bgVideo = document.getElementById("bgVideo");
+
+bgVideo.addEventListener("loadedmetadata", () => {
+  const cutoff = bgVideo.duration - 6; // last 5 seconds removed
+
+  setInterval(() => {
+    if (bgVideo.currentTime >= cutoff) {
+      bgVideo.currentTime = 0; // or 1–2 if you want smoother loop
+    }
+  }, 200);
+});
+
+ function goNext() {
+    window.location.href = "strawberry.html";
+  }
+const canvas = document.getElementById("fw");
+const ctx = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+const gravity = 0.05;
+const fireworks = [];
+const particles = [];
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+class Firework {
+  constructor() {
+    this.x = random(0, canvas.width);
+    this.y = canvas.height;
+    this.targetY = random(canvas.height * 0.2, canvas.height * 0.5);
+    this.speed = random(4, 7);
+    this.exploded = false;
+    this.color = `hsl(${random(0,360)},100%,60%)`;
+  }
+
+  update() {
+    this.y -= this.speed;
+    if (this.y <= this.targetY) {
+      this.exploded = true;
+      explode(this.x, this.y, this.color);
+    }
+  }
+
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x, this.y, 2, 2);
+  }
+}
+
+class Particle {
+  constructor(x, y, color) {
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.radius = 2;
+    this.alpha = 1;
+    this.speedX = random(-4, 4);
+    this.speedY = random(-4, 4);
+  }
+
+  update() {
+    this.speedY += gravity;
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.alpha -= 0.01;
+  }
+
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+function explode(x, y, color) {
+  for (let i = 0; i < 120; i++) {
+    particles.push(new Particle(x, y, color));
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  fireworks.forEach((f, i) => {
+    f.update();
+    f.draw();
+    if (f.exploded) fireworks.splice(i, 1);
+  });
+
+  particles.forEach((p, i) => {
+    p.update();
+    p.draw();
+    if (p.alpha <= 0) particles.splice(i, 1);
+  });
+
+  requestAnimationFrame(animate);
+}
+
+
+setInterval(() => fireworks.push(new Firework()), 700);
+animate();
+
+
+
+
+</script>
+
+
+</body>
+</html>
