@@ -84,8 +84,20 @@
   const params = new URLSearchParams(window.location.search);
   
   const song = document.getElementById("music");
-  song.currentTime = 30;
-  song.play();
+  let started = false;
+
+  function startMusic() {
+    if (!started) {
+      song.currentTime = 30; // optional
+      song.play();
+      started = true;
+    }
+  }
+
+  document.addEventListener("click", startMusic, { once: true });
+  document.addEventListener("touchstart", startMusic, { once: true });
+
+
 </script>
 
 </body>
